@@ -322,4 +322,8 @@ void Jit::DumpDisassembly() const {
     Common::DumpDisassembledX64(impl->block_of_code.GetCodeBegin(), size);
 }
 
+std::vector<std::string> Jit::Disassemble() {
+    const size_t size = (const char*)impl->block_of_code.getCurr() - (const char*)impl->block_of_code.GetCodeBegin();
+    return Common::DisassembleX64(impl->block_of_code.GetCodeBegin(), size);
+}
 }  // namespace Dynarmic::A32

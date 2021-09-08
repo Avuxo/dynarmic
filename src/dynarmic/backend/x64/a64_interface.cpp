@@ -204,6 +204,11 @@ public:
         Common::DumpDisassembledX64(block_of_code.GetCodeBegin(), size);
     }
 
+    std::vector<std::string> Disassemble() {
+        const size_t size = (const char*)block_of_code.getCurr() - (const char*)block_of_code.GetCodeBegin();
+        return Common::DisassembleX64(block_of_code.GetCodeBegin(), size);
+    }
+
 private:
     static CodePtr GetCurrentBlockThunk(void* thisptr) {
         Jit::Impl* this_ = static_cast<Jit::Impl*>(thisptr);
@@ -400,6 +405,10 @@ bool Jit::IsExecuting() const {
 
 void Jit::DumpDisassembly() const {
     return impl->DumpDisassembly();
+}
+
+std::vector<std::string> Jit::Disassemble() {
+    return impl->Disassemble();
 }
 
 }  // namespace Dynarmic::A64

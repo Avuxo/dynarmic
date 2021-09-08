@@ -45,7 +45,6 @@ std::vector<std::string> Dynarmic::Common::DisassembleX64(const void* ptr, size_
     size_t offset = 0;
     ZydisDecodedInstruction instruction;
     while (ZYAN_SUCCESS(ZydisDecoderDecodeBuffer(&decoder, (const char*)ptr + offset, size - offset, &instruction))) {
-        fmt::print("{:016x}  ", (u64)ptr + offset);
 
         char buffer[256];
         ZydisFormatterFormatInstruction(&formatter, &instruction, buffer, sizeof(buffer), (u64)ptr + offset);

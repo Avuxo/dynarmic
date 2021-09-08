@@ -10,6 +10,7 @@
 #include <cstdint>
 #include <memory>
 #include <string>
+#include <vector>
 
 #include "dynarmic/interface/A64/config.h"
 
@@ -116,6 +117,8 @@ public:
 
     /// Debugging: Dump a disassembly all of compiled code to the console.
     void DumpDisassembly() const;
+
+    std::vector<std::string> Disassemble();
 
 private:
     struct Impl;
