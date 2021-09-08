@@ -118,7 +118,11 @@ public:
     /// Debugging: Dump a disassembly all of compiled code to the console.
     void DumpDisassembly() const;
 
-    std::vector<std::string> Disassemble();
+    /* 
+     * Disassemble the instructions following the current pc and return
+     * the resulting instructions as a vector of their string representations.
+     */
+    std::vector<std::string> Disassemble() const;
 
 private:
     struct Impl;

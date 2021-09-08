@@ -21,11 +21,11 @@ void DumpDisassembledX64(const void* ptr, size_t size) {
 
     size_t offset = 0;
     ZydisDecodedInstruction instruction;
-    while (ZYAN_SUCCESS(ZydisDecoderDecodeBuffer(&decoder, (const char*)ptr + offset, size - offset, &instruction))) {
+    while (ZYAN_SUCCESS(ZydisDecoderDecodeBuffer(&decoder, static_cast<const char*>(ptr) + offset, size - offset, &instruction))) {
         fmt::print("{:016x}  ", (u64)ptr + offset);
 
         char buffer[256];
-        ZydisFormatterFormatInstruction(&formatter, &instruction, buffer, sizeof(buffer), (u64)ptr + offset);
+        ZydisFormatterFormatInstruction(&formatter, &instruction, buffer, sizeof(buffer), reinterpret_cast<u64>(ptr) + offset);
         puts(buffer);
 
         offset += instruction.length;
@@ -44,10 +44,10 @@ std::vector<std::string> Dynarmic::Common::DisassembleX64(const void* ptr, size_
 
     size_t offset = 0;
     ZydisDecodedInstruction instruction;
-    while (ZYAN_SUCCESS(ZydisDecoderDecodeBuffer(&decoder, (const char*)ptr + offset, size - offset, &instruction))) {
+    while (ZYAN_SUCCESS(ZydisDecoderDecodeBuffer(&decoder, static_cast<const char *>(ptr) + offset, size - offset, &instruction))) {
 
         char buffer[256];
-        ZydisFormatterFormatInstruction(&formatter, &instruction, buffer, sizeof(buffer), (u64)ptr + offset);
+        ZydisFormatterFormatInstruction(&formatter, &instruction, buffer, sizeof(buffer), reinterpret_cast<u64>(ptr) + offset);
         
         result.push_back(fmt::format("{:016x}  {}", (u64)ptr + offset, buffer));
 

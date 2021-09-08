@@ -200,12 +200,12 @@ public:
     }
 
     void DumpDisassembly() const {
-        const size_t size = (const char*)block_of_code.getCurr() - (const char*)block_of_code.GetCodeBegin();
+        const size_t size = reinterpret_cast<const char*>(block_of_code.getCurr()) - reinterpret_cast<const char*>(block_of_code.GetCodeBegin());
         Common::DumpDisassembledX64(block_of_code.GetCodeBegin(), size);
     }
 
-    std::vector<std::string> Disassemble() {
-        const size_t size = (const char*)block_of_code.getCurr() - (const char*)block_of_code.GetCodeBegin();
+    std::vector<std::string> Disassemble() const {
+        const size_t size = reinterpret_cast<const char*>(block_of_code.getCurr()) - reinterpret_cast<const char*>(block_of_code.GetCodeBegin());
         return Common::DisassembleX64(block_of_code.GetCodeBegin(), size);
     }
 
@@ -407,7 +407,7 @@ void Jit::DumpDisassembly() const {
     return impl->DumpDisassembly();
 }
 
-std::vector<std::string> Jit::Disassemble() {
+std::vector<std::string> Jit::Disassemble() const {
     return impl->Disassemble();
 }
 
