@@ -32,8 +32,6 @@ void DumpDisassembledX64(const void* ptr, size_t size) {
     }
 }
 
-// Disassemble `size' bytes from `ptr' and return the disassembled lines as a vector
-// of strings.
 std::vector<std::string> Dynarmic::Common::DisassembleX64(const void* ptr, size_t size) {
     std::vector<std::string> result;
     ZydisDecoder decoder;
@@ -45,7 +43,6 @@ std::vector<std::string> Dynarmic::Common::DisassembleX64(const void* ptr, size_
     size_t offset = 0;
     ZydisDecodedInstruction instruction;
     while (ZYAN_SUCCESS(ZydisDecoderDecodeBuffer(&decoder, static_cast<const char *>(ptr) + offset, size - offset, &instruction))) {
-
         char buffer[256];
         ZydisFormatterFormatInstruction(&formatter, &instruction, buffer, sizeof(buffer), reinterpret_cast<u64>(ptr) + offset);
         
@@ -56,5 +53,4 @@ std::vector<std::string> Dynarmic::Common::DisassembleX64(const void* ptr, size_
 
     return result;
 }
-
 }  // namespace Dynarmic::Common
