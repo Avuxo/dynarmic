@@ -5,9 +5,11 @@
 
 #pragma once
 
-#include "dynarmic/common/common_types.h"
+
 #include <vector>
 #include <string>
+
+#include "dynarmic/common/common_types.h"
 
 namespace Dynarmic::Common {
 
