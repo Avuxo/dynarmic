@@ -5,9 +5,8 @@
 
 #pragma once
 
-
-#include <vector>
 #include <string>
+#include <vector>
 
 #include "dynarmic/common/common_types.h"
 
